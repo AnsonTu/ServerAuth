@@ -4,6 +4,8 @@ const http = require("http");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const app = express();
+// Add new routes
+const router = require("./router");
 
 // App Setup
 // app.use() is used to register middleware
@@ -12,6 +14,7 @@ const app = express();
 // nodemon automatically restarts the server whenver a change is made
 app.use(morgan("combined"));
 app.use(bodyParser.json({ type: "*/*" }));
+router(app);
 
 // Server Setup
 const port = process.env.PORT || 3090;
