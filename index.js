@@ -7,8 +7,8 @@ const app = express();
 
 // App Setup
 // app.use() is used to register middleware
-// morgan is a logging framework
-// bodyParser is used to parse incoming requests into JSON
+// morgan is a logging middleware
+// bodyParser is a middleware used to parse incoming requests into JSON
 // nodemon automatically restarts the server whenver a change is made
 app.use(morgan("combined"));
 app.use(bodyParser.json({ type: "*/*" }));
