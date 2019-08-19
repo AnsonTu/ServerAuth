@@ -7,6 +7,11 @@ const app = express();
 // Add new routes
 const router = require("./router");
 
+// Set up the connection between mongoose and mongoDB
+const mongoose = require("mongoose");
+// DB setup. This creates a new database inside of mongoDB called auth
+mongoose.connect("mongodb://localhost:27017/auth");
+
 // App Setup
 // app.use() is used to register middleware
 // morgan is a logging middleware
