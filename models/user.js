@@ -3,6 +3,8 @@
 const mongoose = require("mongoose");
 // Schema is used to tell mongoose what will be defined in the model
 const Schema = mongoose.Schema;
+// Bycrpt is used to encrypt passowords before they are saved
+const bcrypt = require("bcrypt-nodejs");
 
 // Define our model
 const userSchema = new Schema({
@@ -11,6 +13,25 @@ const userSchema = new Schema({
   email: { type: String, unique: true, lowercase: true },
   // Password is a string
   password: String
+});
+
+// On Save Hook, encrypt password
+userSchema.pre("save", function(next) {
+  const user = this;
+
+  bcrypt.genSalt(10, function(err, salt) {
+    if (err) {
+      return next(err);
+    }
+    bcrypt.hash(user.password, salt, null, function(err, hash) {
+      if (err) {
+        return next(err);
+      }
+
+      user.password = hash;
+      next();
+    });
+  });
 });
 
 // Create the model class
