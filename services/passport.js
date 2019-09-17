@@ -63,3 +63,4 @@ const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done) {
 
 // Tell passport to use the JWT strategy
 passport.use(jwtLogin);
+passport.use(localLogin);

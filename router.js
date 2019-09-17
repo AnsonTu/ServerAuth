@@ -5,6 +5,7 @@ const passport = require("passport");
 // By default, passport wants to create a cookie-based session for this request
 // Set session to false when using JWT
 const requireAuth = passport.authenticate("jwt", { session: false });
+const requireSignin = passport.authenticate("local", { session: false });
 
 // Export a function in node
 module.exports = function(app) {
@@ -21,5 +22,6 @@ module.exports = function(app) {
   app.get("/", requireAuth, function(req, res) {
     res.send({ hi: "there" });
   });
+  app.post("/signin", requireSignin, Authentication.signin);
   app.post("/signup", Authentication.signup);
 };
